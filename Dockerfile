@@ -2,17 +2,17 @@ FROM nodered/node-red:latest
 
 USER root
 
-# Installieren der benötigten Pakete
-RUN apt-get update && apt-get install -y \
-    python3-tkinter \
+# Install needed packages
+RUN apk update && apk add --no-cache \
+    python3 \
+    py3-tkinter \
     wakeonlan \
-    samba \
-    git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    samba-client \
+    samba-common-tools \
+    git
 
-# Clonen des pixoo Repositories
-RUN git clone https://github.com/SomethingWithComputers/pixoo.git /pixoo
+# Clone pixoo repository. Shallow clone with -d 1 to get latest only.
+RUN git clone https://github.com/SomethingWithComputers/pixoo.git -d 1 /pixoo-repo
 
 USER node-red
 
