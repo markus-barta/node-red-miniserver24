@@ -5,7 +5,7 @@ USER root
 # Install needed packages
 RUN apk update && apk add --no-cache \
     python3 \
-    py3-tkinter \
+    python3-tkinter \
     samba-client \
     samba-common-tools \
     git \
