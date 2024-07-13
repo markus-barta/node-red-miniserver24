@@ -5,11 +5,11 @@ USER root
 # Install needed packages
 RUN apk update && apk add --no-cache \
     python3 \
-    python3-tkinter \
-    wakeonlan \
+    py3-tkinter \
     samba-client \
     samba-common-tools \
-    git
+    git \
+    && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing wakeonlan
 
 # Clone pixoo repository. Shallow clone with -d 1 to get latest only.
 RUN git clone https://github.com/SomethingWithComputers/pixoo.git -d 1 /pixoo-repo
