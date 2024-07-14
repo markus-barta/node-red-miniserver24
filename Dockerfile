@@ -1,7 +1,6 @@
 FROM nodered/node-red:latest
 
 USER root
-
 # Add community and testing repositories, then install needed packages 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
@@ -15,13 +14,28 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     git \
     wakeonlan
 
-# Verify pip installation
-RUN pip3 --version
-
-# DISABLED: Installed by the startup script for now due to permission issues
-# Clone pixoo repository. Shallow clone with --depth 1 to get latest only.
-#RUN git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git /repo/pixoo
-
 USER node-red
+
+# Set environment variables
+ENV NODE_RED_HOME=/usr/src/node-red
+ENV VENV_PATH="$NODE_RED_HOME/.venv"
+
+# Set up virtual environment in the existing home directory
+RUN python3 -m venv $VENV_PATH
+ENV PATH="$VENV_PATH/bin:$PATH"
+
+# Verify pip installation and update pip
+RUN pip3 --version && \
+    pip3 install --upgrade pip
+
+# Install Python packages for Pixoo requirements
+RUN pip3 install requests~=2.31.0 Pillow~=10.0.0
+
+# Clone pixoo repository
+RUN mkdir -p $NODE_RED_HOME/.build && \
+    git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git $NODE_RED_HOME/.build/pixoo
+
+# Install pixoo
+RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 
 # Here you can add further configurations or installations if needed
