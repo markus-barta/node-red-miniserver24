@@ -18,8 +18,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 # Verify pip installation
 RUN pip3 --version
 
+# DISABLED: Installed by the startup script for now due to permission issues
 # Clone pixoo repository. Shallow clone with --depth 1 to get latest only.
-RUN git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git /repo/pixoo
+#RUN git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git /repo/pixoo
 
 USER node-red
 
