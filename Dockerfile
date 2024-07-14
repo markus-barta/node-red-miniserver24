@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache \
     && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing wakeonlan
 
 # Clone pixoo repository. Shallow clone with --depth 1 to get latest only.
-RUN git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git /data/pixoo-repo
+RUN git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git /repo/pixoo
 
 USER node-red
 
