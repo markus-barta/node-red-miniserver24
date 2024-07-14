@@ -2,18 +2,25 @@ FROM nodered/node-red:latest
 
 USER root
 
-# Install needed packages
-RUN apk update && apk add --no-cache \
+# Add community and testing repositories, then install needed packages 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    apk update && apk add --no-cache \
     python3 \
+    python3-dev \
+    py3-pip \
     python3-tkinter \
     samba-client \
     samba-common-tools \
     git \
-    && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing wakeonlan
+    wakeonlan
+
+# Verify pip installation
+RUN pip3 --version
 
 # Clone pixoo repository. Shallow clone with --depth 1 to get latest only.
 RUN git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git /repo/pixoo
 
 USER node-red
 
-# Hier können Sie weitere Konfigurationen oder Installationen hinzufügen, falls nötig
+# Here you can add further configurations or installations if needed
