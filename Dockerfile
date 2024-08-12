@@ -11,8 +11,7 @@ RUN apk update && \
     python3-tkinter \
     samba-client \
     samba-common-tools \
-    git \
-    etherwake
+    git
 
 USER node-red
 
@@ -33,5 +32,8 @@ RUN pip3 install requests~=2.31.0 Pillow~=10.0.0
 
 # Install pixoo-api using npm
 RUN npm i adamkdean/pixoo-api
+
+# Install wakeonlan using pip
+RUN pip3 install wakeonlan
 
 # Here you can add further configurations or installations if needed
