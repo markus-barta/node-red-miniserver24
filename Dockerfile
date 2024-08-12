@@ -12,7 +12,7 @@ RUN apk update && \
     samba-client \
     samba-common-tools \
     git \
-    wakeonlan
+    etherwake
 
 USER node-red
 
