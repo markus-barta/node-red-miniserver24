@@ -39,6 +39,6 @@ RUN mkdir -p $NODE_RED_HOME/.build && \
 RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 
 # Install js pixoo-api using npm
-RUN npm i adamkdean/pixoo-api
+# RUN npm i adamkdean/pixoo-api
 
 # Here you can add further configurations or installations if needed
