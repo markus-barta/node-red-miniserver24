@@ -27,13 +27,22 @@ ENV PATH="$VENV_PATH/bin:$PATH"
 RUN pip3 --version && \
     pip3 install --upgrade pip
 
+# Install wakeonlan using pip
+RUN pip3 install wakeonlan
+
+## Pixoo
+
 # Install Python packages for Pixoo requirements
 RUN pip3 install requests~=2.31.0 Pillow~=10.0.0
 
-# Install pixoo-api using npm
-RUN npm i adamkdean/pixoo-api
+# Clone pixoo repository
+RUN mkdir -p $NODE_RED_HOME/.build && \
+    git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git $NODE_RED_HOME/.build/pixoo
 
-# Install wakeonlan using pip
-RUN pip3 install wakeonlan
+# Install pixoo python-lib
+RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
+
+# Install pixoo-api js-lib using npm
+RUN npm i adamkdean/pixoo-api
 
 # Here you can add further configurations or installations if needed
