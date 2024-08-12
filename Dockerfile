@@ -1,10 +1,10 @@
 FROM nodered/node-red:latest
 
 USER root
-# Add community and testing repositories, then install needed packages 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk update && apk add --no-cache \
+
+# Update apk and install necessary packages from stable Alpine repositories
+RUN apk update && \
+    apk add --no-cache \
     python3 \
     python3-dev \
     py3-pip \
@@ -31,14 +31,7 @@ RUN pip3 --version && \
 # Install Python packages for Pixoo requirements
 RUN pip3 install requests~=2.31.0 Pillow~=10.0.0
 
-# Clone pixoo repository
-RUN mkdir -p $NODE_RED_HOME/.build && \
-    git clone --depth 1 https://github.com/SomethingWithComputers/pixoo.git $NODE_RED_HOME/.build/pixoo
-
-# Install pixoo
-RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
-
-# Install js pixoo-api using npm
-# RUN npm i adamkdean/pixoo-api
+# Install pixoo-api using npm
+RUN npm i adamkdean/pixoo-api
 
 # Here you can add further configurations or installations if needed
