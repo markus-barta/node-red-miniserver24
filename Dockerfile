@@ -31,9 +31,8 @@ RUN pip3 --version && \
 RUN pip3 install wakeonlan
 
 ## Pixoo
-
 # Install Python packages for Pixoo requirements
-RUN pip3 install requests~=2.31.0 Pillow~=10.0.0
+RUN pip3 install --no-cache-dir --upgrade requests~=2.31.0 Pillow~=10.0.0
 
 # Clone pixoo repository
 RUN mkdir -p $NODE_RED_HOME/.build && \
@@ -42,7 +41,8 @@ RUN mkdir -p $NODE_RED_HOME/.build && \
 # Install pixoo python-lib
 RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 
-# Install pixoo-api js-lib using npm
-RUN npm i adamkdean/pixoo-api
+# Install pixoo-api js-lib using npm, update axios and sharp
+RUN npm i adamkdean/pixoo-api && \
+    npm i axios@latest sharp@latest --save-dev
 
 # Here you can add further configurations or installations if needed
