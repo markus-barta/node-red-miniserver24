@@ -13,6 +13,9 @@ RUN apk update && \
     samba-common-tools \
     git
 
+# Install ffmpeg
+RUN apk add --no-cache ffmpeg
+
 USER node-red
 
 # Set environment variables
