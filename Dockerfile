@@ -44,8 +44,8 @@ RUN mkdir -p $NODE_RED_HOME/.build && \
 # Install pixoo python-lib
 RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 
-# Install pixoo-api js-lib using npm, update axios and sharp
+# Install pixoo-api js-lib using npm, update axios and sharp, and install cheerio
 RUN npm i adamkdean/pixoo-api && \
-    npm i axios@latest sharp@latest --save-dev
+    npm i axios@latest sharp@latest --save-dev && \
+    npm i cheerio
 
-# Here you can add further configurations or installations if needed
