@@ -44,6 +44,10 @@ RUN mkdir -p $NODE_RED_HOME/.build && \
 # Install pixoo python-lib
 RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 
+# Install dependencies for philipshue-events
+RUN npm install @types/eventsource@^1.1.15 @types/node@^20.11.24 eventsource@^2.0.2 \
+    glob@^8.1.0 node-red@^3.1.6 nodemon@^3.1.0 tsc@^2.0.4 typescript@^5.3.3 --save-dev
+
 # Pre-install additional packages
 RUN npm i adamkdean/pixoo-api && \
     npm i axios@latest sharp@latest --save-dev && \
