@@ -45,12 +45,13 @@ RUN mkdir -p $NODE_RED_HOME/.build && \
 RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 
 # Install dependencies for philipshue-events
-RUN npm install @types/eventsource@^1.1.15 @types/node@^20.11.24 eventsource@^2.0.2 \
-    glob@^8.1.0 node-red@^3.1.6 nodemon@^3.1.0 tsc@^2.0.4 typescript@^5.3.3 --save-dev
+# RUN npm install @types/eventsource@^1.1.15 @types/node@^20.11.24 eventsource@^2.0.2 \
+#    glob@^8.1.0 node-red@^3.1.6 nodemon@^3.1.0 tsc@^2.0.4 typescript@^5.3.3 --save-dev
 
 # Pre-install additional packages
-RUN npm i adamkdean/pixoo-api && \
-    npm i axios@latest sharp@latest --save-dev && \
-    npm i cheerio && \
-    npm i node-red-contrib-broadlink-control && \
-    npm i yadomi/node-red-contrib-philipshue-events
+RUN npm i adamkdean/pixoo-api                                 # API for Pixoo devices (e.g., LED displays)
+RUN npm i axios@latest                                        # HTTP client for making requests
+RUN npm i sharp@latest                                        # High-performance image processing
+RUN npm i cheerio@latest                                      # Server-side jQuery-like HTML parsing
+RUN npm i node-red-contrib-broadlink-control@latest           # Control Broadlink devices (e.g., IR blasters)
+RUN npm i @yadomi/node-red-contrib-philipshue-events@latest   # Philips Hue integration for real-time events
