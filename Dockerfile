@@ -48,5 +48,5 @@ RUN pip3 install -e $NODE_RED_HOME/.build/pixoo
 RUN npm i adamkdean/pixoo-api && \
     npm i axios@latest sharp@latest --save-dev && \
     npm i cheerio && \
-    npm i node-red-contrib-broadlink-control
-
+    npm i node-red-contrib-broadlink-control && \
+    npm i yadomi/node-red-contrib-philipshue-events
