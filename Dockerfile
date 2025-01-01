@@ -55,4 +55,5 @@ RUN npm i sharp@latest                                        # High-performance
 RUN npm i cheerio@latest                                      # Server-side jQuery-like HTML parsing
 RUN npm i node-red-contrib-broadlink-control@latest           # Control Broadlink devices (e.g., IR blasters)
 RUN npm i @yadomi/node-red-contrib-philipshue-events@latest   # Philips Hue integration for real-time events
-RUN npm i evdev --unsafe-perm --no-update-notifier --only=production # Interact with input devices (for FLIRC)
+RUN npm i node-red-contrib-bravia@latest
+# RUN npm i evdev --unsafe-perm --no-update-notifier --only=production # Interact with input devices (for FLIRC) # replaced by using fs
